@@ -6,14 +6,22 @@ An assignment from [The Odin Project](https://www.theodinproject.com/paths/full-
 
 *"Keep track of how long it takes between when the photo is first loaded and when the user finally identifies all characters (do this on the server side). Once a round is complete, ask the user for his/her name and record that time. Then show a leaderboard of all the times for people who have played your game!*
 
+
 ## Technologies
 
 - ReactJS
-- Styled Componenets
+  - Styled Components (first attempt)
+  - Prop Types (first attempt)
 - Firebase
+
 
 ## Installation Instructions
 
+Navigate to the directory where you want to install the Where's Wally site. 
+
+1. `git clone git@github.com:programmurr/wheres-wally.git`
+2. `cd wheres-wally`
+3. `npm install`
 
 
 ### Status
