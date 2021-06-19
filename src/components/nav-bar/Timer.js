@@ -1,15 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const TimerContainer = styled.div`
-
-`;
 
 function Timer() {
   return (
-    <TimerContainer>
+    <div>
       00:00
-    </TimerContainer>
+    </div>
   )
 }
 

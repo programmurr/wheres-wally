@@ -11,6 +11,9 @@ const CharacterContainer = styled.div`
   width: 10vw;
 `;
 
+// Add a prop to the styled component when found?
+//   To change the opacity to 25%
+
 const CharacterHead = styled.img`
   max-width: 50px;
   max-height: 50px;

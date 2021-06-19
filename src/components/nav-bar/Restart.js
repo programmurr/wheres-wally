@@ -7,6 +7,7 @@ const RestartButton = styled.button`
   border-radius: 5px;
 `;
 
+
 function Restart() {
 
   const handleRestart = () => {
