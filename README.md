@@ -26,5 +26,5 @@ Navigate to the directory where you want to install the Where's Wally site.
 
 ### Status
 
-Under construction. View my progress on [Firebase](https://firebase.google.com/)
+Under construction. View my progress on [Firebase](https://wheres-waldo-ca65d.web.app)
 
