@@ -13,11 +13,13 @@ const NavContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   border-bottom: 1px solid black;
+  background-color: #ffffff;
+  width: 100vw;
 `;
 
 function Navbar() {
   return (
-    <NavContainer>
+    <NavContainer id="NavContainer">
       <Characters />
       <Title />
       <Timer />
