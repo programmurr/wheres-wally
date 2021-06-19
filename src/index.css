@@ -5,3 +5,13 @@
   font-size: 100%;
   vertical-align: baseline;
 }
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.expand {
+  margin-top: 7vh;
+}
