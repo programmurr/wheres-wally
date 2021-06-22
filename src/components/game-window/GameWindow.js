@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import PhotoFrame from './PhotoFrame';
+import ClickMenu from './ClickMenu';
 import handleScroll from '../../utils/handleSroll';
 
 function GameWindow() {
@@ -13,11 +15,21 @@ function GameWindow() {
     }
   })
 
+  const handleClick = (x, y) => {
+    alert('Left: ' + x + ' ; Top: ' + y)
+  }
+
   return (
     <div id="GameWindow">
-      <PhotoFrame />
+      <PhotoFrame handleClick={handleClick}/>
+      <ClickMenu />
     </div>
   )
 }
+
+GameWindow.propTypes = {
+  handleClick: PropTypes.func
+}
+
 
 export default GameWindow;

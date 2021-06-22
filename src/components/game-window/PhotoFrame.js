@@ -7,13 +7,13 @@ const PhotoContainer = styled.div`
   justify-items: center;
 `;
 
-function PhotoFrame() {
+function PhotoFrame(props) {
 
   const handleClick = (event) => {
-    // console.log("Mouse X Coord: ", event.pageX);
-    // console.log("Mouse Y Coord: ", event.pageY);
     const rect = event.target.getBoundingClientRect();
-    console.log(rect);
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    props.handleClick(x, y);
   }
   
   return (
