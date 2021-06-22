@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import PhotoFrame from './PhotoFrame';
 import handleScroll from '../../utils/handleSroll';
 
-// Figure out how to make NavBar sticky without the extra classes in 
-//  index.css
 function GameWindow() {
 
   useEffect(() => {
