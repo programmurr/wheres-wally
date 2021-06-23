@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Odlaw from '../../img/odlaw.jpg';
 import Waldo from '../../img/waldo.jpg';
@@ -28,5 +29,10 @@ function Characters() {
     </CharacterContainer>
   )
 }
+
+CharacterHead.propTypes = {
+  src: PropTypes.string
+}
+
 
 export default Characters;

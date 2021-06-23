@@ -1,17 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Odlaw from '../../img/odlaw.jpg';
 import Waldo from '../../img/waldo.jpg';
 import Whitebeard from '../../img/whitebeard.jpeg';
 
-const ClickMenuContainer = styled.div``;
+const ClickMenuContainer = styled.div`
+`;
 
 const MenuList = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 15%;
   border-bottom: 2px solid black;
   border-radius: 5px;
+  max-width: 10%;
+  min-width: 192px;
+  &.hidden {
+    display: none;
+  }
 `;
 
 const MenuListItem = styled.div`
@@ -21,6 +27,9 @@ const MenuListItem = styled.div`
   border-left: 2px solid black;
   border-right: 2px solid black;
   &:hover {
+    p {
+      -webkit-transform: scale(1.1);
+    }
     cursor: pointer;
   }
   border-top-left-radius: ${
@@ -36,6 +45,7 @@ const MenuListItem = styled.div`
 `;
 
 const MenuListText = styled.p`
+  margin-left: 5px;
   font-weight: bold;
 `;
 
@@ -45,30 +55,39 @@ const MenuListImg = styled.img`
 `;
 
 function ClickMenu() {
-  return (
-    <ClickMenuContainer>
-      <MenuList>
-        <MenuListItem id="WaldoItem">
-          <MenuListImg src={Waldo} />
-          <MenuListText>
-            Waldo
-          </MenuListText>
-        </MenuListItem>
-        <MenuListItem>
-          <MenuListImg src={Odlaw} />
-          <MenuListText>
-            Odlaw
-          </MenuListText>
-        </MenuListItem>
-        <MenuListItem>
-          <MenuListImg src={Whitebeard} />
-          <MenuListText>
-            Whitebeard
-          </MenuListText>
-        </MenuListItem>
-      </MenuList>
-    </ClickMenuContainer>
-  )
+
+    return (
+      <ClickMenuContainer>
+        <MenuList  className="hidden" id="ClickMenuList">
+          <MenuListItem id="WaldoItem">
+            <MenuListImg src={Waldo} />
+            <MenuListText>
+              Waldo
+            </MenuListText>
+          </MenuListItem>
+          <MenuListItem id="OdlawItem">
+            <MenuListImg src={Odlaw} />
+            <MenuListText>
+              Odlaw
+            </MenuListText>
+          </MenuListItem>
+          <MenuListItem id="WhitebeardItem">
+            <MenuListImg src={Whitebeard} />
+            <MenuListText>
+              Whitebeard
+            </MenuListText>
+          </MenuListItem>
+        </MenuList>
+      </ClickMenuContainer>
+    )
+}
+
+MenuListItem.propTypes = {
+  id: PropTypes.string
+}
+
+MenuListImg.propTypes = {
+  src: PropTypes.string
 }
 
 export default ClickMenu;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import BeachScene from '../../img/wheres-wally-beach-smaller.jpg';
 
 const PhotoContainer = styled.div`
@@ -17,10 +18,14 @@ function PhotoFrame(props) {
   }
   
   return (
-    <PhotoContainer className="PhotoFrame">
-      <img src={BeachScene} onClick={handleClick}/>
+    <PhotoContainer>
+      <img src={BeachScene} onClick={handleClick} alt="Wheres Waldo Beach Scene"/>
     </PhotoContainer>
   )
+}
+
+PhotoFrame.propTypes = {
+  handleClick: PropTypes.func
 }
 
 export default PhotoFrame;

@@ -16,15 +16,22 @@ function GameWindow() {
   })
 
   const handleClick = (x, y) => {
-    alert('Left: ' + x + ' ; Top: ' + y)
+    const clickMenu = document.getElementById("ClickMenuList");
+    const hiddenRegex = new RegExp('.* hidden', 'gm');
+
+    if (hiddenRegex.test(clickMenu.className)) {
+      clickMenu.classList.remove('hidden');
+    } else {
+      clickMenu.classList.add('hidden');
+    }
   }
 
-  return (
-    <div id="GameWindow">
-      <PhotoFrame handleClick={handleClick}/>
-      <ClickMenu />
-    </div>
-  )
+    return (
+      <div id="GameWindow">
+        <PhotoFrame handleClick={handleClick}/>
+        <ClickMenu />
+      </div>
+    )
 }
 
 GameWindow.propTypes = {
