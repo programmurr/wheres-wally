@@ -7,14 +7,8 @@ import handleScroll from '../../utils/handleSroll';
 function GameWindow() {
 
   const [ active, setActive ] = useState(false);
-  const [ mouseX, setMouseX ] = useState('');
-  const [ mouseY, setMouseY ] = useState('');
-
-
-  // Maybe try triggering the ClickMenu with state/props instead
-  //  of adding/removing className
-  // If props = active: active styling
-  // If props = hidden: hidden styling
+  const [ mouseX, setMouseX ] = useState(0);
+  const [ mouseY, setMouseY ] = useState(0);
 
   useEffect(() => {
     const navBar = document.getElementById('NavContainer');
