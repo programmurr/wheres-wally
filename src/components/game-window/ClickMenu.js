@@ -6,6 +6,18 @@ import Waldo from '../../img/waldo.jpg';
 import Whitebeard from '../../img/whitebeard.jpeg';
 
 const ClickMenuContainer = styled.div`
+  max-width: 10%;
+  min-width: 192px;
+  background-color: #ffffff;
+  display: ${props => props.active ? "": "none"};
+  position: ${props => props.active ? "absolute" : ""};
+  left: ${props => props.active ? `${props.mouseX}px` : "0"};
+  top: ${props => props.active ? `${props.mouseY + 65}px` : "0"};
+  box-shadow: ${
+    props => props.active
+      ? "5px 5px 8px 2px #111111"
+      : ""
+  }
 `;
 
 const MenuList = styled.div`
@@ -13,11 +25,6 @@ const MenuList = styled.div`
   flex-direction: column;
   border-bottom: 2px solid black;
   border-radius: 5px;
-  max-width: 10%;
-  min-width: 192px;
-  &.hidden {
-    display: none;
-  }
 `;
 
 const MenuListItem = styled.div`
@@ -54,11 +61,18 @@ const MenuListImg = styled.img`
   max-height: 30px;
 `;
 
-function ClickMenu() {
+function ClickMenu(props) {
+
+  const  { active, mouseX, mouseY } = props;
+
 
     return (
-      <ClickMenuContainer>
-        <MenuList  className="hidden" id="ClickMenuList">
+      <ClickMenuContainer 
+        active={active}
+        mouseX={mouseX}
+        mouseY={mouseY}
+      >
+        <MenuList>
           <MenuListItem id="WaldoItem">
             <MenuListImg src={Waldo} />
             <MenuListText>
@@ -80,6 +94,12 @@ function ClickMenu() {
         </MenuList>
       </ClickMenuContainer>
     )
+}
+
+ClickMenu.propTypes = {
+  active: PropTypes.bool,
+  mouseX: PropTypes.number,
+  mouseY: PropTypes.number
 }
 
 MenuListItem.propTypes = {

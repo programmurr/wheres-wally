@@ -1,10 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import PhotoFrame from './PhotoFrame';
 import ClickMenu from './ClickMenu';
 import handleScroll from '../../utils/handleSroll';
 
 function GameWindow() {
+
+  const [ active, setActive ] = useState(false);
+  const [ mouseX, setMouseX ] = useState('');
+  const [ mouseY, setMouseY ] = useState('');
+
+
+  // Maybe try triggering the ClickMenu with state/props instead
+  //  of adding/removing className
+  // If props = active: active styling
+  // If props = hidden: hidden styling
 
   useEffect(() => {
     const navBar = document.getElementById('NavContainer');
@@ -16,20 +26,19 @@ function GameWindow() {
   })
 
   const handleClick = (x, y) => {
-    const clickMenu = document.getElementById("ClickMenuList");
-    const hiddenRegex = new RegExp('.* hidden', 'gm');
-
-    if (hiddenRegex.test(clickMenu.className)) {
-      clickMenu.classList.remove('hidden');
-    } else {
-      clickMenu.classList.add('hidden');
-    }
+    setMouseX(x);
+    setMouseY(y);
+    setActive(active => !active);
   }
 
     return (
       <div id="GameWindow">
         <PhotoFrame handleClick={handleClick}/>
-        <ClickMenu />
+        <ClickMenu 
+          active={active}
+          mouseX={mouseX}
+          mouseY={mouseY}
+        />
       </div>
     )
 }
