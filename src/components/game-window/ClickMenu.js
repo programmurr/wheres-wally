@@ -9,11 +9,10 @@ import MenuItem from './MenuItem';
 const ClickMenuContainer = styled.div`
   max-width: 10%;
   min-width: 192px;
-  background-color: #ffffff;
   display: ${props => props.active ? "": "none"};
   position: ${props => props.active ? "absolute" : ""};
-  left: ${props => props.active ? `${props.mouseX}px` : "0"};
-  top: ${props => props.active ? `${props.mouseY + 65}px` : "0"};
+  left: ${props => props.active ? `${props.mouseX - 15}px` : "0"};
+  top: ${props => props.active ? `${props.mouseY + 50}px` : "0"};
   box-shadow: ${
     props => props.active
       ? "5px 5px 8px 2px #111111"
@@ -26,6 +25,13 @@ const MenuList = styled.div`
   flex-direction: column;
   border-bottom: 2px solid black;
   border-radius: 5px;
+  background-color: #ffffff;
+`;
+
+const Target = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 2px solid red;
 `;
 
 function ClickMenu(props) {
@@ -38,6 +44,7 @@ function ClickMenu(props) {
         mouseX={mouseX}
         mouseY={mouseY}
       >
+      <Target active={active} mouseX={mouseX} mouseY={mouseY} />
         <MenuList>
           <MenuItem 
             id="waldo"

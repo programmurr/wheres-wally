@@ -42,8 +42,6 @@ function MenuItem(props) {
   const { id, src, character } = props;
 
   const handleClick = (event) => {
-    // Pass the mouse position on up so the position can check if
-    // it is near the correct character
     console.log("Character: ", character);
     console.log("Event: ", event);
   }
