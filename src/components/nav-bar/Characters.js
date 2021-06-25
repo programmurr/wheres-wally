@@ -21,6 +21,7 @@ const CharacterHead = styled.img`
 `;
 
 function Characters() {
+
   return (
     <CharacterContainer>
       <CharacterHead src={Waldo} />

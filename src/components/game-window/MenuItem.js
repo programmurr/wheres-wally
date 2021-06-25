@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import characterInfo from '../../utils/characterInfo';
 
 const MenuItemContainer = styled.div`
   display: flex;
@@ -39,18 +40,41 @@ const MenuImg = styled.img`
 
 function MenuItem(props) {
 
-  const { id, src, character } = props;
+  const { 
+    id, 
+    src, 
+    name,
+    mouseX,
+    mouseY,
+  } = props;
 
-  const handleClick = (event) => {
-    console.log("Character: ", character);
-    console.log("Event: ", event);
+  const handleClick = (event, mouseX, mouseY, name) => {
+    const character = characterInfo.filter(
+      info => info["name"] === name
+    )[0]
+    const x = parseInt(mouseX);
+    const y = parseInt(mouseY);
+    const leftBoundary = x - 10;
+    const rightBoundary = x + 10;
+    const topBoundary = y - 10;
+    const bottomBoundary = y + 10;
+    if (
+      (character["left"] >= leftBoundary && character["left"] <= rightBoundary)
+      &&  (character["top"] >= bottomBoundary && character["top"] <= topBoundary)
+    ) {
+      // change opacity
+      // mark as found
+    }
   }
 
   return (
-    <MenuItemContainer id={id} onClick={handleClick}>
+    <MenuItemContainer
+      id={id} 
+      onClick={(e) => handleClick(e, mouseX, mouseY, name)}
+    >
         <MenuImg src={src} />
         <MenuText>
-          {character}
+          {name}
         </MenuText>
     </MenuItemContainer>
   )
@@ -59,7 +83,9 @@ function MenuItem(props) {
 MenuItem.propTypes = {
   id: PropTypes.string,
   src: PropTypes.string,
-  character: PropTypes.string
+  name: PropTypes.string,
+  mouseX: PropTypes.string,
+  mouseY: PropTypes.string
 }
 
 MenuImg.propTypes = {

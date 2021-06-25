@@ -11,8 +11,8 @@ const ClickMenuContainer = styled.div`
   min-width: 192px;
   display: ${props => props.active ? "": "none"};
   position: ${props => props.active ? "absolute" : ""};
-  left: ${props => props.active ? `${props.mouseX - 15}px` : "0"};
-  top: ${props => props.active ? `${props.mouseY + 50}px` : "0"};
+  left: ${props => props.active ? `${props.mouseX - 13}px` : "0"};
+  top: ${props => props.active ? `${props.mouseY + 54}px` : "0"};
   box-shadow: ${
     props => props.active
       ? "5px 5px 8px 2px #111111"
@@ -44,22 +44,28 @@ function ClickMenu(props) {
         mouseX={mouseX}
         mouseY={mouseY}
       >
-      <Target active={active} mouseX={mouseX} mouseY={mouseY} />
+      <Target active={active} />
         <MenuList>
           <MenuItem 
             id="waldo"
             src={Waldo}
-            character="Waldo"
+            name="Waldo"
+            mouseX={mouseX}
+            mouseY={mouseY}
           />
           <MenuItem 
             id="odlaw"
             src={Odlaw}
-            character="Odlaw"
+            name="Odlaw"
+            mouseX={mouseX}
+            mouseY={mouseY}
           />
           <MenuItem 
             id="whitebeard"
             src={Whitebeard}
-            character="Whitebeard"
+            name="Whitebeard"
+            mouseX={mouseX}
+            mouseY={mouseY}
           />
         </MenuList>
       </ClickMenuContainer>
