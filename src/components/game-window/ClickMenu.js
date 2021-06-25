@@ -6,6 +6,7 @@ import Waldo from '../../img/waldo.jpg';
 import Whitebeard from '../../img/whitebeard.jpeg';
 import MenuItem from './MenuItem';
 
+// TODO: Eliminate box shadow for target row
 const ClickMenuContainer = styled.div`
   max-width: 10%;
   min-width: 192px;
@@ -36,7 +37,7 @@ const Target = styled.div`
 
 function ClickMenu(props) {
 
-  const  { active, mouseX, mouseY } = props;
+  const  { active, mouseX, mouseY, characterInfo } = props;
 
     return (
       <ClickMenuContainer 
@@ -52,6 +53,7 @@ function ClickMenu(props) {
             name="Waldo"
             mouseX={mouseX}
             mouseY={mouseY}
+            characterInfo={characterInfo}
           />
           <MenuItem 
             id="odlaw"
@@ -59,6 +61,7 @@ function ClickMenu(props) {
             name="Odlaw"
             mouseX={mouseX}
             mouseY={mouseY}
+            characterInfo={characterInfo}
           />
           <MenuItem 
             id="whitebeard"
@@ -66,6 +69,7 @@ function ClickMenu(props) {
             name="Whitebeard"
             mouseX={mouseX}
             mouseY={mouseY}
+            characterInfo={characterInfo}
           />
         </MenuList>
       </ClickMenuContainer>
@@ -75,7 +79,8 @@ function ClickMenu(props) {
 ClickMenu.propTypes = {
   active: PropTypes.bool,
   mouseX: PropTypes.number,
-  mouseY: PropTypes.number
+  mouseY: PropTypes.number,
+  characterInfo: PropTypes.object
 }
 
 export default ClickMenu;

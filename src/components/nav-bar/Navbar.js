@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+// import PropTypes from 'prop-types';
 import Characters from './Characters';
 import Title from './Title';
 import Timer from './Timer';
@@ -17,15 +18,17 @@ const NavContainer = styled.div`
   width: 100vw;
 `;
 
-function Navbar() {
+function Navbar(props) {
+
   return (
     <NavContainer id="NavContainer">
-      <Characters />
+      <Characters/>
       <Title />
       <Timer />
       <Restart />
     </NavContainer>
   )
 }
+
 
 export default Navbar;

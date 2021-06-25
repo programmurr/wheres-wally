@@ -1,14 +1,14 @@
-// Packages
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom';
 import styled from 'styled-components';
-// Components
 import Navbar from './components/nav-bar/Navbar';
 import GameWindow from './components/game-window/GameWindow';
 import LeaderBoard from './components/leader-board/LeaderBoard';
+import CharacterContextProvider from './contexts/characterContext';
 
 const GlobalStyles = styled.div`
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -17,21 +17,22 @@ const GlobalStyles = styled.div`
   width: 100vw;
 `;
 
-
 function App() {
-  
+
   return (
     <GlobalStyles>
       <Router>
-        <Navbar />
-        <Switch>
-          <Route exact path="/">
-            <GameWindow />
-          </Route>
-          <Route path="/leaderboard">
-            <LeaderBoard />
-          </Route>
-        </Switch>
+        <CharacterContextProvider>
+          <Navbar />
+          <Switch>
+            <Route exact path="/">
+              <GameWindow />
+            </Route>
+            <Route path="/leaderboard">
+              <LeaderBoard />
+            </Route>
+          </Switch>
+        </CharacterContextProvider>
       </Router>
     </GlobalStyles>
   );

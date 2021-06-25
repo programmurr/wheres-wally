@@ -12,15 +12,14 @@ const CharacterContainer = styled.div`
   width: 10vw;
 `;
 
-// Add a prop to the styled component when found?
-//   To change the opacity to 25%
-
+// TODO: Use props to change opacity to 25% if 'found' is true
 const CharacterHead = styled.img`
   max-width: 50px;
   max-height: 50px;
 `;
 
-function Characters() {
+function Characters(props) {
+
 
   return (
     <CharacterContainer>
@@ -32,7 +31,7 @@ function Characters() {
 }
 
 CharacterHead.propTypes = {
-  src: PropTypes.string
+  src: PropTypes.string,
 }
 
 

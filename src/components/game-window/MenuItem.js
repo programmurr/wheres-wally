@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import characterInfo from '../../utils/characterInfo';
+import  { CharacterContext } from '../../contexts/characterContext';
 
 const MenuItemContainer = styled.div`
   display: flex;
@@ -45,13 +45,13 @@ function MenuItem(props) {
     src, 
     name,
     mouseX,
-    mouseY,
+    mouseY
   } = props;
 
-  const handleClick = (event, mouseX, mouseY, name) => {
-    const character = characterInfo.filter(
-      info => info["name"] === name
-    )[0]
+  const { characterState, setCharacterState } = useContext(CharacterContext);
+
+  const handleClick = (mouseX, mouseY, name) => {
+    const character = characterState[name];
     const x = parseInt(mouseX);
     const y = parseInt(mouseY);
     const leftBoundary = x - 10;
@@ -60,17 +60,19 @@ function MenuItem(props) {
     const bottomBoundary = y + 10;
     if (
       (character["left"] >= leftBoundary && character["left"] <= rightBoundary)
-      &&  (character["top"] >= bottomBoundary && character["top"] <= topBoundary)
+      &&  (character["top"] >= topBoundary && character["top"] <= bottomBoundary)
     ) {
-      // change opacity
-      // mark as found
+      alert(`Found ${character.name}!`);
+      // TODO: mark as found using the setCharacterState (hopefully it works)
+    } else {
+      alert("Put your glasses on!");
     }
   }
 
   return (
     <MenuItemContainer
       id={id} 
-      onClick={(e) => handleClick(e, mouseX, mouseY, name)}
+      onClick={() => handleClick(mouseX, mouseY, name)}
     >
         <MenuImg src={src} />
         <MenuText>
@@ -84,8 +86,8 @@ MenuItem.propTypes = {
   id: PropTypes.string,
   src: PropTypes.string,
   name: PropTypes.string,
-  mouseX: PropTypes.string,
-  mouseY: PropTypes.string
+  mouseX: PropTypes.number,
+  mouseY: PropTypes.number,
 }
 
 MenuImg.propTypes = {
