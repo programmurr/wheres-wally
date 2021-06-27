@@ -37,7 +37,7 @@ const Target = styled.div`
 
 function ClickMenu(props) {
 
-  const  { active, mouseX, mouseY, characterInfo } = props;
+  const  { active, mouseX, mouseY } = props;
 
     return (
       <ClickMenuContainer 
@@ -53,7 +53,6 @@ function ClickMenu(props) {
             name="Waldo"
             mouseX={mouseX}
             mouseY={mouseY}
-            characterInfo={characterInfo}
           />
           <MenuItem 
             id="odlaw"
@@ -61,7 +60,6 @@ function ClickMenu(props) {
             name="Odlaw"
             mouseX={mouseX}
             mouseY={mouseY}
-            characterInfo={characterInfo}
           />
           <MenuItem 
             id="whitebeard"
@@ -69,7 +67,6 @@ function ClickMenu(props) {
             name="Whitebeard"
             mouseX={mouseX}
             mouseY={mouseY}
-            characterInfo={characterInfo}
           />
         </MenuList>
       </ClickMenuContainer>
@@ -79,8 +76,7 @@ function ClickMenu(props) {
 ClickMenu.propTypes = {
   active: PropTypes.bool,
   mouseX: PropTypes.number,
-  mouseY: PropTypes.number,
-  characterInfo: PropTypes.object
+  mouseY: PropTypes.number
 }
 
 export default ClickMenu;

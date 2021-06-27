@@ -6,6 +6,8 @@
   vertical-align: baseline;
 }
 
+/* TODO: Make these in line with React principles 
+  i.e. remove and retain functionality */
 .sticky {
   position: fixed;
   top: 0;

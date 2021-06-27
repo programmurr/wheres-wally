@@ -50,8 +50,8 @@ function MenuItem(props) {
 
   const { characterState, setCharacterState } = useContext(CharacterContext);
 
-  const handleClick = (mouseX, mouseY, name) => {
-    const character = characterState[name];
+  const handleClick = (mouseX, mouseY, charName) => {
+    const character = characterState[charName];
     const x = parseInt(mouseX);
     const y = parseInt(mouseY);
     const leftBoundary = x - 10;
@@ -62,8 +62,11 @@ function MenuItem(props) {
       (character["left"] >= leftBoundary && character["left"] <= rightBoundary)
       &&  (character["top"] >= topBoundary && character["top"] <= bottomBoundary)
     ) {
-      alert(`Found ${character.name}!`);
       // TODO: mark as found using the setCharacterState (hopefully it works)
+      setCharacterState(prevState => ({
+        ...prevState,
+        [charName]: {...prevState.charName, found: true}
+      }))
     } else {
       alert("Put your glasses on!");
     }

@@ -4,9 +4,7 @@ import PhotoFrame from './PhotoFrame';
 import ClickMenu from './ClickMenu';
 import handleScroll from '../../utils/handleSroll';
 
-function GameWindow(props) {
-
-  const { characterInfo } = props;
+function GameWindow() {
 
   const [ active, setActive ] = useState(false);
   const [ mouseX, setMouseX ] = useState(0);
@@ -34,7 +32,6 @@ function GameWindow(props) {
           active={active}
           mouseX={mouseX}
           mouseY={mouseY}
-          characterInfo={characterInfo}
         />
       </div>
     )

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Odlaw from '../../img/odlaw.jpg';
 import Waldo from '../../img/waldo.jpg';
 import Whitebeard from '../../img/whitebeard.jpeg';
+import  { CharacterContext } from '../../contexts/characterContext';
+
 
 const CharacterContainer = styled.div`
   display: flex;
@@ -12,26 +14,27 @@ const CharacterContainer = styled.div`
   width: 10vw;
 `;
 
-// TODO: Use props to change opacity to 25% if 'found' is true
 const CharacterHead = styled.img`
   max-width: 50px;
   max-height: 50px;
+  opacity: ${props => props.found ? "25%" : "100%"};
 `;
 
-function Characters(props) {
-
+function Characters() {
+  const { characterState } = useContext(CharacterContext);
 
   return (
     <CharacterContainer>
-      <CharacterHead src={Waldo} />
-      <CharacterHead src={Odlaw} />
-      <CharacterHead src={Whitebeard} />
+      <CharacterHead src={Waldo} found={characterState.Waldo.found}/>
+      <CharacterHead src={Odlaw} found={characterState.Odlaw.found}/>
+      <CharacterHead src={Whitebeard} found={characterState.Whitebeard.found}/>
     </CharacterContainer>
   )
 }
 
 CharacterHead.propTypes = {
   src: PropTypes.string,
+  found: PropTypes.bool
 }
 
 
