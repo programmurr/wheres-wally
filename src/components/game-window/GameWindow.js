@@ -10,6 +10,8 @@ function GameWindow() {
   const [ mouseX, setMouseX ] = useState(0);
   const [ mouseY, setMouseY ] = useState(0);
 
+  // TODO: Change this so it is more react-y
+  // e.g. Use props and styled div instead of directly changing class
   useEffect(() => {
     const navBar = document.getElementById('NavContainer');
     const gameWindow = document.getElementById('GameWindow');
