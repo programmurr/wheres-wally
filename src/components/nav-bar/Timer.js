@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+// TODO: Pass time state up to App so it can be used in Leaderboard
 function Timer() {
   const [ secondsLabel, setSecondsLabel ] = useState('00');
   const [ minutesLabel, setMinutesLabel ] = useState('00');

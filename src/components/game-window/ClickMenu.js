@@ -7,6 +7,7 @@ import Whitebeard from '../../img/whitebeard.jpeg';
 import MenuItem from './MenuItem';
 
 // TODO: Eliminate box shadow for target row
+// TODO: Make menu disappear after a correct click (currently hangs around until user clicks away)
 const ClickMenuContainer = styled.div`
   max-width: 10%;
   min-width: 192px;
