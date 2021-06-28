@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,6 +19,18 @@ const GlobalStyles = styled.div`
 
 function App() {
 
+  const [ allFound, setAllFound ] = useState(false);
+
+  const handleAllFound = () => {
+    setAllFound(true);
+  }
+
+  useEffect(() => {
+    if (allFound) {
+      alert("All characters found! Click here to go to the leaderboard!");
+    }
+  })
+
   return (
     <GlobalStyles>
       <Router>
@@ -26,7 +38,7 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/">
-              <GameWindow />
+              <GameWindow handleAllFound={handleAllFound}/>
             </Route>
             <Route path="/leaderboard">
               <LeaderBoard />
