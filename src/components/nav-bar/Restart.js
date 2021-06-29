@@ -11,7 +11,10 @@ const RestartButton = styled.button`
 function Restart() {
 
   const handleRestart = () => {
-    alert('Restarted!');
+    // if (confirm("Are you sure you want to restart?")) {
+    //   location.reload();
+    // }
+    alert("Restarted!")
   }
 
   return (

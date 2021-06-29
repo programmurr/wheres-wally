@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { TimeContext } from '../../contexts/timeContext';
 
-// TODO: Pass time state up to App so it can be used in Leaderboard
 function Timer() {
-  const [ secondsLabel, setSecondsLabel ] = useState('00');
-  const [ minutesLabel, setMinutesLabel ] = useState('00');
-  const [ totalSeconds, setTotalSeconds ] = useState(0);
+  const { timeState, setTimeState } = useContext(TimeContext);
 
   const pad = (time) => {
     let timeString = time + "";
@@ -17,19 +15,21 @@ function Timer() {
 
   useEffect(() => {
     let interval = setInterval(() => {
-      const newTotal = totalSeconds + 1;
+      const newTotal = timeState.totalSeconds + 1;
       const newSecondsLabel = pad(newTotal % 60);
       const newMinutesLabel = pad(parseInt(newTotal / 60));
-      setSecondsLabel(newSecondsLabel);
-      setMinutesLabel(newMinutesLabel);
-      setTotalSeconds(parseInt(newTotal));
+      setTimeState({
+        seconds: newSecondsLabel,
+        minutes: newMinutesLabel,
+        totalSeconds: parseInt(newTotal)
+      })
     }, 1000);
     return () => clearInterval(interval);
   });
 
   return (
-    <div>
-      <p>{minutesLabel}:{secondsLabel}</p>
+    <div className="Timer">
+      <p>{timeState.minutes}:{timeState.seconds}</p>
     </div>
   )
 }
