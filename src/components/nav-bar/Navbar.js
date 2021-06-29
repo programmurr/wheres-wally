@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Characters from './Characters';
 import Title from './Title';
@@ -15,12 +15,28 @@ const NavContainer = styled.div`
   border-bottom: 1px solid black;
   background-color: #ffffff;
   width: 100vw;
+  position: ${props => props.stickyStatus ? "fixed" : ""};
+  top: ${props => props.stickyStatus ? "0" : ""};
 `;
 
-function Navbar(props) {
+function Navbar() {
+
+  const [ stickyStatus, setStickyStatus ] = useState(false);
+
+  useEffect(() => {
+    const nav = document.getElementById('NavContainer');
+    const sticky = nav.offsetTop;
+    document.addEventListener('scroll', () => {
+      if (window.pageYOffset > sticky) {
+        setStickyStatus(true);
+      } else {
+        setStickyStatus(false);
+      }
+    })
+  })
 
   return (
-    <NavContainer id="NavContainer">
+    <NavContainer id="NavContainer" stickyStatus={stickyStatus}>
       <Characters/>
       <Title />
       <Timer />

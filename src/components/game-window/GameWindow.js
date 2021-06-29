@@ -1,9 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import PhotoFrame from './PhotoFrame';
 import ClickMenu from './ClickMenu';
-import handleScroll from '../../utils/handleSroll';
 import  { CharacterContext } from '../../contexts/characterContext';
+
+const GameWindowContainer = styled.div`
+  margin-top: ${props => props.expand ? "7vh" : ""};
+`;
 
 
 function GameWindow(props) {
@@ -15,16 +19,18 @@ function GameWindow(props) {
   const [ active, setActive ] = useState(false);
   const [ mouseX, setMouseX ] = useState(0);
   const [ mouseY, setMouseY ] = useState(0);
+  const [ expand, setExpand ] = useState(false);
 
-  // TODO: Change this so it is more react-y
-  // e.g. Use props and styled div instead of directly changing class
   useEffect(() => {
-    const navBar = document.getElementById('NavContainer');
-    const gameWindow = document.getElementById('GameWindow');
-    const sticky = navBar.offsetTop;
-    window.onscroll = () => {
-      handleScroll(navBar, gameWindow, sticky);
-    }
+    const nav = document.getElementById('NavContainer');
+    const sticky = nav.offsetTop;
+    document.addEventListener('scroll', () => {
+      if (window.pageYOffset > sticky) {
+        setExpand(true);
+      } else {
+        setExpand(false);
+      }
+    })
   })
 
   useEffect(() => {
@@ -44,20 +50,19 @@ function GameWindow(props) {
   }
 
     return (
-      <div id="GameWindow">
+      <GameWindowContainer expand={expand}>
         <PhotoFrame handleClick={handleClick}/>
         <ClickMenu 
           active={active}
           mouseX={mouseX}
           mouseY={mouseY}
         />
-      </div>
+      </GameWindowContainer>
     )
 }
 
 GameWindow.propTypes = {
-  handleClick: PropTypes.func,
-  characterInfo: PropTypes.object
+  handleAllFound: PropTypes.func,
 }
 
 
