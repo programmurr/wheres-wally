@@ -66,13 +66,19 @@ function MenuItem(props) {
 
   const handleClick = (mouseX, mouseY, charName) => {
     const character = characterState[charName];
-
-    if (character.found) {
+    if (character.found && !hasBeenFound(character, mouseX, mouseY)) {
+      alert("You already found that person, and they're not here!");
+    } else if (character.found && hasBeenFound(character, mouseX, mouseY)) {
       alert("You already found this person!");
     } else if (hasBeenFound(character, mouseX, mouseY)) {
+      const updatedCharacter = Object.assign({}, character);
+      updatedCharacter.found = true;
       setCharacterState(prevState => ({
         ...prevState,
-        [charName]: {...prevState.charName, found: true}
+        [charName]: {
+          ...prevState.charName,
+          ...updatedCharacter
+        }
       }))
     } else {
       alert("Put your glasses on!");
