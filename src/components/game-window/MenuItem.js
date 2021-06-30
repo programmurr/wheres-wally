@@ -45,7 +45,8 @@ function MenuItem(props) {
     src, 
     name,
     mouseX,
-    mouseY
+    mouseY,
+    hideMenu
   } = props;
 
   const { characterState, setCharacterState } = useContext(CharacterContext);
@@ -80,6 +81,7 @@ function MenuItem(props) {
           ...updatedCharacter
         }
       }))
+      hideMenu();
     } else {
       alert("Put your glasses on!");
     }

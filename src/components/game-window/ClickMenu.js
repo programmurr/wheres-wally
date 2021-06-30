@@ -6,8 +6,6 @@ import Waldo from '../../img/waldo.jpg';
 import Whitebeard from '../../img/whitebeard.jpeg';
 import MenuItem from './MenuItem';
 
-// TODO: Eliminate box shadow for target row
-// TODO: Make menu disappear after a correct click (currently hangs around until user clicks away)
 const ClickMenuContainer = styled.div`
   max-width: 10%;
   min-width: 192px;
@@ -15,11 +13,6 @@ const ClickMenuContainer = styled.div`
   position: ${props => props.active ? "absolute" : ""};
   left: ${props => props.active ? `${props.mouseX - 13}px` : "0"};
   top: ${props => props.active ? `${props.mouseY + 54}px` : "0"};
-  box-shadow: ${
-    props => props.active
-      ? "5px 5px 8px 2px #111111"
-      : ""
-  }
 `;
 
 const MenuList = styled.div`
@@ -28,6 +21,11 @@ const MenuList = styled.div`
   border-bottom: 2px solid black;
   border-radius: 5px;
   background-color: #ffffff;
+  box-shadow: ${
+    props => props.active
+      ? "5px 5px 8px 2px #111111"
+      : ""
+  }
 `;
 
 const Target = styled.div`
@@ -38,22 +36,27 @@ const Target = styled.div`
 
 function ClickMenu(props) {
 
-  const  { active, mouseX, mouseY } = props;
+  const  { active, mouseX, mouseY, hideMenu } = props;
+
+  const handleHideMenu = () => {
+    hideMenu();
+  }
 
     return (
       <ClickMenuContainer 
-        active={active}
         mouseX={mouseX}
         mouseY={mouseY}
+        active={active}
       >
-      <Target active={active} />
-        <MenuList>
+      <Target />
+        <MenuList active={active}>
           <MenuItem 
             id="waldo"
             src={Waldo}
             name="Waldo"
             mouseX={mouseX}
             mouseY={mouseY}
+            hideMenu={handleHideMenu}
           />
           <MenuItem 
             id="odlaw"
@@ -61,6 +64,7 @@ function ClickMenu(props) {
             name="Odlaw"
             mouseX={mouseX}
             mouseY={mouseY}
+            hideMenu={handleHideMenu}
           />
           <MenuItem 
             id="whitebeard"
@@ -68,6 +72,7 @@ function ClickMenu(props) {
             name="Whitebeard"
             mouseX={mouseX}
             mouseY={mouseY}
+            hideMenu={handleHideMenu}
           />
         </MenuList>
       </ClickMenuContainer>

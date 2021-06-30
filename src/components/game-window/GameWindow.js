@@ -49,6 +49,10 @@ function GameWindow(props) {
     setActive(active => !active);
   }
 
+  const hideMenu = () => {
+    setActive(active => !active);
+  }
+
     return (
       <GameWindowContainer expand={expand}>
         <PhotoFrame handleClick={handleClick}/>
@@ -56,6 +60,7 @@ function GameWindow(props) {
           active={active}
           mouseX={mouseX}
           mouseY={mouseY}
+          hideMenu={hideMenu}
         />
       </GameWindowContainer>
     )
