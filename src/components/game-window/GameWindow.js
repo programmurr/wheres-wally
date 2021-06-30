@@ -25,7 +25,7 @@ function GameWindow(props) {
     const nav = document.getElementById('NavContainer');
     const sticky = nav.offsetTop;
     document.addEventListener('scroll', () => {
-      if (window.pageYOffset > sticky) {
+      if (window.pageYOffset > sticky || window.pageXOffset > 0) {
         setExpand(true);
       } else {
         setExpand(false);
@@ -39,7 +39,12 @@ function GameWindow(props) {
       && characterState.Odlaw.found
       && characterState.Whitebeard.found
     ) {
-      handleAllFound();
+      if (window.confirm("All characters found! Click here to go to the leaderboard!")) {
+        handleAllFound();
+      } else {
+        // If they don't want to visit the leaderboard
+        window.location.reload();
+      }
     }
   }, [characterState, handleAllFound]);
 

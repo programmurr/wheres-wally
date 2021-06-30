@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 import styled from 'styled-components';
 import Navbar from './components/nav-bar/Navbar';
@@ -26,24 +27,30 @@ function App() {
     setAllFound(true);
   }
 
-  useEffect(() => {
-    if (allFound) {
-      alert("All characters found! Click here to go to the leaderboard!");
-    }
-  })
+  const handleReset = () => {
+    setAllFound(false);
+  }
 
   return (
     <GlobalStyles>
       <Router>
         <CharacterContextProvider>
           <TimeContextProvider>
-            <Navbar />
+            <Navbar handleReset={handleReset}/>
             <Switch>
               <Route exact path="/">
-                <GameWindow handleAllFound={handleAllFound}/>
+                {
+                  allFound 
+                  ? <Redirect to="/leaderboard" /> 
+                  : <GameWindow handleAllFound={handleAllFound}/>
+                }
               </Route>
               <Route path="/leaderboard">
-                <LeaderBoard />
+                {
+                  !allFound 
+                  ? <Redirect to="/" /> 
+                  : <LeaderBoard />
+                }
               </Route>
             </Switch>
           </TimeContextProvider>

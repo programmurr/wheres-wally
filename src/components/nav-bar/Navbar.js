@@ -17,17 +17,17 @@ const NavContainer = styled.div`
   width: 100vw;
   position: ${props => props.stickyStatus ? "fixed" : ""};
   top: ${props => props.stickyStatus ? "0" : ""};
+  left: ${props => props.stickyStatus ? "0" : ""};
 `;
 
-function Navbar() {
-
+function Navbar(props) {
   const [ stickyStatus, setStickyStatus ] = useState(false);
 
   useEffect(() => {
     const nav = document.getElementById('NavContainer');
     const sticky = nav.offsetTop;
     document.addEventListener('scroll', () => {
-      if (window.pageYOffset > sticky) {
+      if (window.pageYOffset > sticky || window.pageXOffset > 0) {
         setStickyStatus(true);
       } else {
         setStickyStatus(false);
@@ -35,12 +35,16 @@ function Navbar() {
     })
   })
 
+  const handleRestart = () => {
+    props.handleReset();
+  }
+
   return (
     <NavContainer id="NavContainer" stickyStatus={stickyStatus}>
       <Characters/>
       <Title />
       <Timer />
-      <Restart />
+      <Restart resetFound={handleRestart}/>
     </NavContainer>
   )
 }

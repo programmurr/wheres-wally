@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { TimeContext } from '../../contexts/timeContext';
 
+// TODO: Freeze time when all characters found
 function Timer() {
   const { timeState, setTimeState } = useContext(TimeContext);
 
