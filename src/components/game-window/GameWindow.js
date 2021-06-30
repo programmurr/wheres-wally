@@ -22,15 +22,17 @@ function GameWindow(props) {
   const [ expand, setExpand ] = useState(false);
 
   useEffect(() => {
+    let isMounted = true;
     const nav = document.getElementById('NavContainer');
     const sticky = nav.offsetTop;
     document.addEventListener('scroll', () => {
       if (window.pageYOffset > sticky || window.pageXOffset > 0) {
-        setExpand(true);
+        if (isMounted) setExpand(true);
       } else {
-        setExpand(false);
+        if (isMounted) setExpand(false);
       }
     })
+    return () => { isMounted = false };
   })
 
   useEffect(() => {
