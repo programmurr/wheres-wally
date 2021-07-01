@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PhotoFrame from './PhotoFrame';
 import ClickMenu from './ClickMenu';
 import  { CharacterContext } from '../../contexts/characterContext';
+import { TimeContext } from '../../contexts/timeContext';
 
 const GameWindowContainer = styled.div`
   margin-top: ${props => props.expand ? "7vh" : ""};
@@ -15,6 +16,7 @@ function GameWindow(props) {
   const { handleAllFound } = props;
 
   const { characterState } = useContext(CharacterContext);
+  const { setTimeState } = useContext(TimeContext);
 
   const [ active, setActive ] = useState(false);
   const [ mouseX, setMouseX ] = useState(0);
@@ -42,13 +44,14 @@ function GameWindow(props) {
       && characterState.Whitebeard.found
     ) {
       if (window.confirm("All characters found! Click here to go to the leaderboard!")) {
+        setTimeState(prevTime => ({ ...prevTime, frozen: true }));
         handleAllFound();
       } else {
         // If they don't want to visit the leaderboard
         window.location.reload();
       }
     }
-  }, [characterState, handleAllFound]);
+  });
 
   const handleClick = (x, y) => {
     setMouseX(x);

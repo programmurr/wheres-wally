@@ -15,17 +15,19 @@ function Timer() {
   }
 
   useEffect(() => {
-    let interval = setInterval(() => {
-      const newTotal = timeState.totalSeconds + 1;
-      const newSecondsLabel = pad(newTotal % 60);
-      const newMinutesLabel = pad(parseInt(newTotal / 60));
-      setTimeState({
-        seconds: newSecondsLabel,
-        minutes: newMinutesLabel,
-        totalSeconds: parseInt(newTotal)
-      })
-    }, 1000);
-    return () => clearInterval(interval);
+    if (!timeState.frozen) {
+      let interval = setInterval(() => {
+        const newTotal = timeState.totalSeconds + 1;
+        const newSecondsLabel = pad(newTotal % 60);
+        const newMinutesLabel = pad(parseInt(newTotal / 60));
+        setTimeState({
+          seconds: newSecondsLabel,
+          minutes: newMinutesLabel,
+          totalSeconds: parseInt(newTotal)
+        })
+      }, 1000);
+      return () => clearInterval(interval);
+    }
   });
 
   return (

@@ -21,13 +21,13 @@ function Restart(props) {
   const { setTimeState } = useContext(TimeContext);
   const { setCharacterState } = useContext(CharacterContext);
 
-  // TODO: Time not resetting mid-game, but does reset from leaderboard
-  const handleRestart = () => {
+  const handleRestart = async () => {
     if (window.confirm("Are you sure you want to restart?")) {
-      setTimeState({
+      await setTimeState({
         seconds: '00',
         minutes: '00',
-        totalSeconds: 0
+        totalSeconds: 0,
+        frozen: false
       });
       setCharacterState({
         Waldo: {

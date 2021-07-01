@@ -6,7 +6,8 @@ const TimeContextProvider = props => {
    const [ timeState, setTimeState ] = useState({
      seconds: '00',
      minutes: '00',
-     totalSeconds: 0
+     totalSeconds: 0,
+     frozen: false
    });
 
    return <TimeContext.Provider value={{ timeState, setTimeState }}>{props.children}</TimeContext.Provider>
