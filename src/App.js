@@ -21,6 +21,8 @@ const GlobalStyles = styled.div`
 
 function App() {
 
+  // TODO: Change to false when leaderboard done
+  // const [ allFound, setAllFound ] = useState(true);
   const [ allFound, setAllFound ] = useState(false);
 
   const handleAllFound = () => {

@@ -37,6 +37,7 @@ function GameWindow(props) {
     return () => { isMounted = false };
   })
 
+  // Is two useEffects bad?
   useEffect(() => {
     if (
       characterState.Waldo.found
