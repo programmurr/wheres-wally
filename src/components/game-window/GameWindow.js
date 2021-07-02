@@ -23,6 +23,7 @@ function GameWindow(props) {
   const [ mouseY, setMouseY ] = useState(0);
   const [ expand, setExpand ] = useState(false);
 
+  // For sticky nav
   useEffect(() => {
     let isMounted = true;
     const nav = document.getElementById('NavContainer');

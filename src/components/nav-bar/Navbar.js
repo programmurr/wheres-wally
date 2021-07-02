@@ -23,6 +23,7 @@ const NavContainer = styled.div`
 function Navbar(props) {
   const [ stickyStatus, setStickyStatus ] = useState(false);
 
+  // For scrolling
   useEffect(() => {
     const nav = document.getElementById('NavContainer');
     const sticky = nav.offsetTop;

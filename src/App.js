@@ -8,7 +8,7 @@ import {
 import styled from 'styled-components';
 import Navbar from './components/nav-bar/Navbar';
 import GameWindow from './components/game-window/GameWindow';
-import LeaderBoard from './components/leader-board/LeaderBoard';
+import Scoreboard from './components/scoreboard/Scoreboard';
 import CharacterContextProvider from './contexts/characterContext';
 import TimeContextProvider from './contexts/timeContext';
 
@@ -21,9 +21,9 @@ const GlobalStyles = styled.div`
 
 function App() {
 
-  // TODO: Change to false when leaderboard done
-  // const [ allFound, setAllFound ] = useState(true);
-  const [ allFound, setAllFound ] = useState(false);
+  // TODO: Change to false when in production
+  const [ allFound, setAllFound ] = useState(true);
+  // const [ allFound, setAllFound ] = useState(false);
 
   const handleAllFound = () => {
     setAllFound(true);
@@ -43,15 +43,15 @@ function App() {
               <Route exact path="/">
                 {
                   allFound 
-                  ? <Redirect to="/leaderboard" /> 
+                  ? <Redirect to="/scoreboard" /> 
                   : <GameWindow handleAllFound={handleAllFound}/>
                 }
               </Route>
-              <Route path="/leaderboard">
+              <Route path="/scoreboard">
                 {
                   !allFound 
                   ? <Redirect to="/" /> 
-                  : <LeaderBoard />
+                  : <Scoreboard />
                 }
               </Route>
             </Switch>
