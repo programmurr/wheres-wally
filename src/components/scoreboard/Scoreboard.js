@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
+import { db } from '../../firebase';
 
 const ScoreboardContainer = styled.div`
   margin-top: ${props => props.expand ? "7vh" : ""};
@@ -27,6 +28,7 @@ const ScoreListItem = styled.li`
   margin-top: 1vh;
 `;
 
+
 function Scoreboard() {
 
   const [ expand, setExpand ] = useState(false);
@@ -35,7 +37,7 @@ function Scoreboard() {
   const sampleData  = [
     {
       name: "Object One",
-      time: 250
+      time: 241
     },
     {
       name: "Object Two",
@@ -47,7 +49,7 @@ function Scoreboard() {
     },
     {
       name: "Object Four",
-      time: 75
+      time: 105
     },
     {
       name: "Object Five",
@@ -55,16 +57,31 @@ function Scoreboard() {
     }
   ];
 
+  // TODO: Replace sampleData with the data from firestore
+  const fetchTimes = async () => {
+    return db.collection('leaderboard')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.data());
+        })
+      })
+  }
+
   const parseTime = (time) => {
     let minutes = Math.floor(time/60);
     let seconds = time % 60;
-    if ( minutes === 1) {
+    if (minutes === 1) {
       minutes = '1 minute';
     } else {
       minutes = `${minutes} minutes`;
     }
-    const string = `${minutes} ${seconds} seconds`;
-    return string;
+    if (seconds === 1) {
+      seconds = '1 second';
+    } else {
+      seconds = `${seconds} seconds`;
+    }
+    return `${minutes} ${seconds}`;
   }
 
   const transformTimes = useMemo(() => {
@@ -92,6 +109,10 @@ function Scoreboard() {
     })
     return () => { isMounted = false };
   })
+
+  useEffect(() => {
+    fetchTimes();
+  }, [])
 
   return (
     <ScoreboardContainer expand={expand}>
