@@ -33,40 +33,7 @@ function Scoreboard() {
 
   const [ expand, setExpand ] = useState(false);
 
-  // Delete after firebase fetch is set up
-  const sampleData  = [
-    {
-      name: "Object One",
-      time: 241
-    },
-    {
-      name: "Object Two",
-      time: 150
-    },
-    {
-      name: "Object Three",
-      time: 605
-    },
-    {
-      name: "Object Four",
-      time: 105
-    },
-    {
-      name: "Object Five",
-      time: 800
-    }
-  ];
-
-  // TODO: Replace sampleData with the data from firestore
-  const fetchTimes = async () => {
-    return db.collection('leaderboard')
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          console.log(doc.data());
-        })
-      })
-  }
+  const [ times, setTimes ] = useState([]);
 
   const parseTime = (time) => {
     let minutes = Math.floor(time/60);
@@ -84,8 +51,8 @@ function Scoreboard() {
     return `${minutes} ${seconds}`;
   }
 
-  const transformTimes = useMemo(() => {
-    const times = Array.from(sampleData)
+  const transformTimes = (entries) => {
+    const times = Array.from(entries)
       .sort((a, b) => {
         return a.time - b.time;
       })
@@ -93,7 +60,7 @@ function Scoreboard() {
         return {...entry, time: parseTime(entry.time)};
       });
     return times;
-  }, [sampleData])
+  }
 
   // For sticky nav
   useEffect(() => {
@@ -111,8 +78,18 @@ function Scoreboard() {
   })
 
   useEffect(() => {
-    fetchTimes();
-  }, [])
+    let times = [];
+    db.collection('leaderboard').get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          times.push(doc.data());  
+        })
+      })
+      .then(() => {
+        const formattedTimes = transformTimes(times);
+        setTimes(formattedTimes);
+      });
+  })
 
   return (
     <ScoreboardContainer expand={expand}>
@@ -121,7 +98,7 @@ function Scoreboard() {
       </HeaderContainer>
       <ScoreListContainer>
         <ScoreList>
-          {transformTimes.map((data, index) => (
+          {times.map((data, index) => (
             <ScoreListItem key={data.name + index}>
               {data.name}: {data.time}
             </ScoreListItem>
