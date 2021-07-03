@@ -1,6 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { db } from '../../firebase';
+import PostScore from './PostScore';
+import handleScroll from '../../utils/handleScroll';
 
 const ScoreboardContainer = styled.div`
   margin-top: ${props => props.expand ? "7vh" : ""};
@@ -32,7 +34,6 @@ const ScoreListItem = styled.li`
 function Scoreboard() {
 
   const [ expand, setExpand ] = useState(false);
-
   const [ times, setTimes ] = useState([]);
 
   const parseTime = (time) => {
@@ -62,22 +63,7 @@ function Scoreboard() {
     return times;
   }
 
-  // For sticky nav
-  useEffect(() => {
-    let isMounted = true;
-    const nav = document.getElementById('NavContainer');
-    const sticky = nav.offsetTop;
-    document.addEventListener('scroll', () => {
-      if (window.pageYOffset > sticky || window.pageXOffset > 0) {
-        if (isMounted) setExpand(true);
-      } else {
-        if (isMounted) setExpand(false);
-      }
-    })
-    return () => { isMounted = false };
-  })
-
-  useEffect(() => {
+  const fetchData = () => {
     let times = [];
     db.collection('leaderboard').get()
       .then((querySnapshot) => {
@@ -89,7 +75,20 @@ function Scoreboard() {
         const formattedTimes = transformTimes(times);
         setTimes(formattedTimes);
       });
+  }
+
+  useEffect(() => {
+    let isMounted = true;
+    handleScroll(isMounted, setExpand);
+    return () => { isMounted = false };
   })
+
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+
+
 
   return (
     <ScoreboardContainer expand={expand}>
@@ -105,6 +104,7 @@ function Scoreboard() {
           ))}
         </ScoreList>
       </ScoreListContainer>
+      <PostScore />
     </ScoreboardContainer>
   )
 }
