@@ -30,7 +30,7 @@ const ScoreListItem = styled.li`
   margin-top: 1vh;
 `;
 
-
+// Need to reload scoreboard on score submission
 function Scoreboard() {
 
   const [ expand, setExpand ] = useState(false);

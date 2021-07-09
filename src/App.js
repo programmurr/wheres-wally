@@ -22,8 +22,8 @@ const GlobalStyles = styled.div`
 function App() {
 
   // TODO: Change to false when in production
-  const [ allFound, setAllFound ] = useState(true);
-  // const [ allFound, setAllFound ] = useState(false);
+  // const [ allFound, setAllFound ] = useState(true);
+  const [ allFound, setAllFound ] = useState(false);
 
   const handleAllFound = () => {
     setAllFound(true);
