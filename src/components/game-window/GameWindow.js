@@ -5,12 +5,11 @@ import PhotoFrame from './PhotoFrame';
 import ClickMenu from './ClickMenu';
 import  { CharacterContext } from '../../contexts/characterContext';
 import { TimeContext } from '../../contexts/timeContext';
-// import handleScroll from '../../utils/handleScroll';
+
 
 const GameWindowContainer = styled.div`
   margin-top: ${props => props.expand ? "7vh" : ""};
 `;
-
 
 function GameWindow(props) {
 
@@ -38,7 +37,6 @@ function GameWindow(props) {
     return () => { isMounted = false };
   })
 
-  // Is two useEffects bad?
   useEffect(() => {
     if (
       characterState.Waldo.found
@@ -49,7 +47,6 @@ function GameWindow(props) {
         setTimeState(prevTime => ({ ...prevTime, frozen: true }));
         handleAllFound();
       } else {
-        // If they don't want to visit the leaderboard
         window.location.reload();
       }
     }

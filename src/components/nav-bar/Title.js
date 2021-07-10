@@ -3,7 +3,7 @@ import React from 'react';
 function Title() {
   return (
     <div>
-      Where's Wally?
+      Where's Waldo?
     </div>
   )
 }

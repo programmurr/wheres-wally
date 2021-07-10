@@ -25,6 +25,7 @@ const ModalContent = styled.div`
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  box-shadow: 2px 2px 5px 2px #222222;
 `;
 
 const CloseModal = styled.span`
@@ -39,8 +40,35 @@ const CloseModal = styled.span`
   }
 `;
 
+const ModalForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ModalText = styled.p`
+  margin-top: 1vh;
+`;
+
+const ModalLabel = styled.label`
+  margin-top: 1vh;
+`;
+
 const ModalInput = styled.input`
   border: 1px solid black;
+  width: 50%;
+  margin-top: 1vh;
+`;
+
+const ModalInputButton = styled.input`
+  width: 15%;
+  margin-top: 1vh;
+  border: 1px solid black;
+  border-radius: 5px;
+  &:hover {
+    cursor: pointer;
+    font-weight: bold;
+  }
 `;
 
 function PostScore(props) {
@@ -73,10 +101,10 @@ function PostScore(props) {
     <MyModal active={modalActive}>
       <ModalContent>
         <CloseModal onClick={handleClose}>&times;</CloseModal>
-        <p>Type in your name and submit your score to the Scoreboard!</p>
-        <p>Your time: {timeState.minutes}:{timeState.seconds}</p>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="username">Enter your name:</label>
+        <ModalForm onSubmit={handleSubmit}>
+          <ModalText>Type in your name and submit your score to the Scoreboard!</ModalText>
+          <ModalText>Your time: {timeState.minutes}:{timeState.seconds}</ModalText>
+          <ModalLabel htmlFor="username">Enter your name:</ModalLabel>
           <ModalInput 
             type="text" 
             name="username"
@@ -85,8 +113,8 @@ function PostScore(props) {
             value={username.value}
             onChange={username.onChange}
           />
-          <input type="submit" value="Submit" />
-        </form>
+          <ModalInputButton type="submit" value="Submit" />
+        </ModalForm>
       </ModalContent>
     </MyModal>
   );
