@@ -4,7 +4,6 @@ import Characters from './Characters';
 import Title from './Title';
 import Timer from './Timer';
 import Restart from './Restart';
-import handleScroll from '../../utils/handleScroll';
 
 const NavContainer = styled.div`
   height: 7vh;
@@ -26,7 +25,15 @@ function Navbar(props) {
 
   useEffect(() => {
     let isMounted = true;
-    handleScroll(isMounted, setStickyStatus);
+    const nav = document.getElementById('NavContainer');
+    const sticky = nav.offsetTop;
+    document.addEventListener('scroll', () => {
+      if (window.pageYOffset > sticky || window.pageXOffset > 0) {
+        if (isMounted) setStickyStatus(true);
+      } else {
+        if (isMounted) setStickyStatus(false);
+      }
+    })
     return () => { isMounted = false };
   })
 

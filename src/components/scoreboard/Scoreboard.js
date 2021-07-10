@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { db } from '../../firebase';
 import PostScore from './PostScore';
-import handleScroll from '../../utils/handleScroll';
 
 const ScoreboardContainer = styled.div`
   margin-top: ${props => props.expand ? "7vh" : ""};
@@ -30,7 +29,7 @@ const ScoreListItem = styled.li`
   margin-top: 1vh;
 `;
 
-// Need to reload scoreboard on score submission
+// TODO: Reload scoreboard on score submission
 function Scoreboard() {
 
   const [ expand, setExpand ] = useState(false);
@@ -52,18 +51,21 @@ function Scoreboard() {
     return `${minutes} ${seconds}`;
   }
 
-  const transformTimes = (entries) => {
-    const times = Array.from(entries)
-      .sort((a, b) => {
-        return a.time - b.time;
-      })
-      .map((entry) => {
-        return {...entry, time: parseTime(entry.time)};
-      });
-    return times;
-  }
+  useEffect(() => {
+    let isMounted = true;
+    const nav = document.getElementById('NavContainer');
+    const sticky = nav.offsetTop;
+    document.addEventListener('scroll', () => {
+      if (window.pageYOffset > sticky || window.pageXOffset > 0) {
+        if (isMounted) setExpand(true);
+      } else {
+        if (isMounted) setExpand(false);
+      }
+    })
+    return () => { isMounted = false };
+  })
 
-  const fetchData = () => {
+  useEffect(() => {
     let times = [];
     db.collection('leaderboard').get()
       .then((querySnapshot) => {
@@ -72,23 +74,16 @@ function Scoreboard() {
         })
       })
       .then(() => {
-        const formattedTimes = transformTimes(times);
+        const formattedTimes = Array.from(times)
+          .sort((a, b) => {
+            return a.time - b.time;
+          })
+          .map((entry) => {
+            return {...entry, time: parseTime(entry.time)};
+          });
         setTimes(formattedTimes);
       });
-  }
-
-  useEffect(() => {
-    let isMounted = true;
-    handleScroll(isMounted, setExpand);
-    return () => { isMounted = false };
-  })
-
-  useEffect(() => {
-    fetchData();
   }, [])
-
-
-
 
   return (
     <ScoreboardContainer expand={expand}>

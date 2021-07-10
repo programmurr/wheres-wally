@@ -5,7 +5,7 @@ import PhotoFrame from './PhotoFrame';
 import ClickMenu from './ClickMenu';
 import  { CharacterContext } from '../../contexts/characterContext';
 import { TimeContext } from '../../contexts/timeContext';
-import handleScroll from '../../utils/handleScroll';
+// import handleScroll from '../../utils/handleScroll';
 
 const GameWindowContainer = styled.div`
   margin-top: ${props => props.expand ? "7vh" : ""};
@@ -24,14 +24,17 @@ function GameWindow(props) {
   const [ mouseY, setMouseY ] = useState(0);
   const [ expand, setExpand ] = useState(false);
 
-  // const checkGameOver = () => {
-
-  // }
-
-  // React is crying about this but it seems to work fine
   useEffect(() => {
     let isMounted = true;
-    handleScroll(isMounted, setExpand);
+    const nav = document.getElementById('NavContainer');
+    const sticky = nav.offsetTop;
+    document.addEventListener('scroll', () => {
+      if (window.pageYOffset > sticky || window.pageXOffset > 0) {
+        if (isMounted) setExpand(true);
+      } else {
+        if (isMounted) setExpand(false);
+      }
+    })
     return () => { isMounted = false };
   })
 
