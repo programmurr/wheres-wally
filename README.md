@@ -10,21 +10,23 @@ An assignment from [The Odin Project](https://www.theodinproject.com/paths/full-
 ## Technologies
 
 - ReactJS
-  - Styled Components (first attempt)
-  - Prop Types (first attempt)
+  - Styled Components
+  - Context
+  - Prop Types
 - Firebase
 
 
 ## Installation Instructions
 
-Navigate to the directory where you want to install the Where's Wally site. 
+To download and run the game locally, navigate to the directory where you want to install and run the following commands:
 
 1. `git clone git@github.com:programmurr/wheres-wally.git`
 2. `cd wheres-wally`
 3. `npm install`
+4. `npm start`
 
 
 ### Status
 
-Under construction. View my progress on [Firebase](https://wheres-waldo-ca65d.web.app)
+Complete and open for feedback on [Firebase](https://wheres-waldo-ca65d.web.app)
 
