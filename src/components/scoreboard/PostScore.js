@@ -43,7 +43,7 @@ const ModalInput = styled.input`
   border: 1px solid black;
 `;
 
-function PostScore() {
+function PostScore(props) {
 
   const { timeState } = useContext(TimeContext);
 
@@ -66,6 +66,7 @@ function PostScore() {
       console.error("Error posting time: ", error);
     });
     setModalActive(active => !active);
+    props.scoreUpdated();
   }
 
   return (

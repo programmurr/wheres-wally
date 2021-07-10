@@ -29,11 +29,11 @@ const ScoreListItem = styled.li`
   margin-top: 1vh;
 `;
 
-// TODO: Reload scoreboard on score submission
 function Scoreboard() {
 
   const [ expand, setExpand ] = useState(false);
   const [ times, setTimes ] = useState([]);
+  const [ scoreUpdated, setScoredUpdated ] = useState(false);
 
   const parseTime = (time) => {
     let minutes = Math.floor(time/60);
@@ -49,6 +49,10 @@ function Scoreboard() {
       seconds = `${seconds} seconds`;
     }
     return `${minutes} ${seconds}`;
+  }
+
+  const handleScoreUpdated = () => {
+    setScoredUpdated(updated => !updated);
   }
 
   useEffect(() => {
@@ -83,7 +87,7 @@ function Scoreboard() {
           });
         setTimes(formattedTimes);
       });
-  }, [])
+  }, [scoreUpdated])
 
   return (
     <ScoreboardContainer expand={expand}>
@@ -99,7 +103,7 @@ function Scoreboard() {
           ))}
         </ScoreList>
       </ScoreListContainer>
-      <PostScore />
+      <PostScore scoreUpdated={handleScoreUpdated}/>
     </ScoreboardContainer>
   )
 }
