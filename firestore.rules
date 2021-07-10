@@ -1,9 +1,18 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if
-          request.time < timestamp.date(2021, 7, 19);
+    match /leaderboard/{scoreID} {
+      // Anyone can read
+      allow read;
+      // No one can update or delete
+      allow update, delete: if false;
+      // Allow create if data meets criteria
+      allow create: if request.resource.data.time is number &&
+      	request.resource.data.time > 0 &&
+      	request.resource.data.time < 1200 &&
+      	request.resource.data.name is string &&
+      	request.resource.data.name.size > 0 &&
+      	request.resource.data.name.size < 30;
     }
   }
 }
