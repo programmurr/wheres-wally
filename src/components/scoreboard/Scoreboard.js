@@ -29,6 +29,8 @@ const ScoreListItem = styled.li`
   margin-top: 1vh;
 `;
 
+// TODO: Lift PostScore 'active' state up to Scoreboard like the ClickMenu
+// So that users can also click away to close it
 function Scoreboard() {
 
   const [ expand, setExpand ] = useState(false);

@@ -11,8 +11,8 @@ const ClickMenuContainer = styled.div`
   min-width: 192px;
   display: ${props => props.active ? "": "none"};
   position: ${props => props.active ? "absolute" : ""};
-  left: ${props => props.active ? `${props.mouseX - 13}px` : "0"};
-  top: ${props => props.active ? `${props.mouseY + 54}px` : "0"};
+  left: ${props => props.active ? `${props.mouseX + 5}px` : "0"};
+  top: ${props => props.active ? `${props.mouseY + 74}px` : "0"};
 `;
 
 const MenuList = styled.div`
@@ -26,12 +26,6 @@ const MenuList = styled.div`
       ? "5px 5px 8px 2px #111111"
       : ""
   }
-`;
-
-const Target = styled.div`
-  width: 20px;
-  height: 20px;
-  border: 2px solid red;
 `;
 
 function ClickMenu(props) {
@@ -48,7 +42,6 @@ function ClickMenu(props) {
         mouseY={mouseY}
         active={active}
       >
-      <Target />
         <MenuList active={active}>
           <MenuItem 
             id="waldo"
